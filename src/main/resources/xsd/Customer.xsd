@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/Customer" xmlns:tns="http://www.example.org/Customer" elementFormDefault="qualified" xmlns:Q1="http://www.example.org/Address" xmlns:Q2="http://www.example.org/Payment">
+
+
+
+
+    <import schemaLocation="Payment.xsd" namespace="http://www.example.org/Payment"></import>
+    <import schemaLocation="Address.xsd" namespace="http://www.example.org/Address"></import>
+    <complexType name="Customer">
+    	<sequence>
+    		<element name="customerId" type="int"></element>
+    		<element name="name" type="string"></element>
+    		<element name="dob" type="date"></element>
+    		<element name="salary">
+    			<simpleType>
+    				<restriction base="double">
+    					<minExclusive value="1000"></minExclusive>
+    					<maxExclusive value="20000"></maxExclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="address" type="Q1:Address"></element>
+    		<element name="payment" type="Q2:Payment" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="Customer" type="tns:Customer"></element>
+</schema>
